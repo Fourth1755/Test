@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Undetectear" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="undetectear">
+        <id name="undetectEarId" type="java.lang.Integer">
+            <column name="undetectEarID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="syngenta.der.entities.Plot" embed-xml="true" fetch="select" insert="true" name="plot" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="pltID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Ratelevel" embed-xml="true" fetch="select" insert="true" name="ratelevel" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="rating" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="note" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="note" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="missingEarImgPath" optimistic-lock="true" type="string" unique="false">
+            <column name="missingEarImgPath"/>
+        </property>
+    </class>
+</hibernate-mapping>

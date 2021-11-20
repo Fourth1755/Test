@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Useraccount" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="useraccount">
+        <id name="userId" type="java.lang.Integer">
+            <column name="userID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="syngenta.der.entities.Country" embed-xml="true" fetch="select" insert="true" name="country" not-found="exception" optimistic-lock="true" unique="false" update="true" cascade="all">
+            <column name="countryID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Position" embed-xml="true" fetch="select" insert="true" name="position" not-found="exception" optimistic-lock="true" unique="false" update="true" cascade="save-update">
+            <column name="positionID" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="userName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="userName" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="firstName" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="firstName" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="lastName" optimistic-lock="true" type="string" unique="false">
+            <column length="40" name="lastName" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="password" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="password" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="picture" optimistic-lock="true" type="string" unique="false">
+            <column name="picture"/>
+        </property>
+        <property generated="never" lazy="false" name="adminRole" optimistic-lock="true" type="string" unique="false">
+            <column length="6" name="adminRole" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="createDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="createDate" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="lastAccess" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="lastAccess" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="userStatus" optimistic-lock="true" type="string" unique="false">
+            <column length="8" name="userStatus" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="token" optimistic-lock="true" type="string" unique="false">
+            <column name="token"/>
+        </property>
+        <property generated="never" lazy="false" name="tokenDateTime" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="tokenDateTime"/>
+        </property>
+<!--
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="plotsForApproveBy" optimistic-lock="true" sort="unsorted" table="plot" cascade="all">
+            <key on-delete="noaction">
+                <column name="approveBy" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Plot" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="usertrials" optimistic-lock="true" sort="unsorted" table="usertrial" cascade="all">
+            <key on-delete="noaction">
+                <column name="userID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Usertrial" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="countryadmins" optimistic-lock="true" sort="unsorted" table="countryadmin" cascade="all">
+            <key on-delete="noaction">
+                <column name="userID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Countryadmin" embed-xml="true" not-found="exception" />
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="trials" optimistic-lock="true" sort="unsorted" table="trial" cascade="all">
+            <key on-delete="noaction">
+                <column name="owner" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Trial" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="plotsForUploadBy" optimistic-lock="true" sort="unsorted" table="plot" cascade="all">
+            <key on-delete="noaction">
+                <column name="uploadBy"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Plot" embed-xml="true" not-found="exception"/>
+        </set>
+-->
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="plotsForApproveBy" optimistic-lock="true" table="plot" cascade="all">
+            <key on-delete="noaction">
+                <column name="approveBy" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Plot" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="usertrials" optimistic-lock="true" table="usertrial" cascade="all">
+            <key on-delete="noaction">
+                <column name="userID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Usertrial" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="countryadmins" optimistic-lock="true" table="countryadmin" cascade="all">
+            <key on-delete="noaction">
+                <column name="userID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Countryadmin" embed-xml="true" not-found="exception" />
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="trials" optimistic-lock="true" table="trial" cascade="all">
+            <key on-delete="noaction">
+                <column name="owner" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Trial" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="plotsForUploadBy" optimistic-lock="true" table="plot" cascade="all">
+            <key on-delete="noaction">
+                <column name="uploadBy"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Plot" embed-xml="true" not-found="exception"/>
+        </bag>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Usertrial" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="usertrial">
+        <composite-id class="syngenta.der.entities.UsertrialId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="userId" type="int">
+                <column name="userID"/>
+            </key-property>
+            <key-property name="trialId" type="string">
+                <column length="20" name="trialID"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="syngenta.der.entities.Trial" embed-xml="true" fetch="select" insert="false" name="trial" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="20" name="trialID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Useraccount" embed-xml="true" fetch="select" insert="false" name="useraccount" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="userID" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="userRole" optimistic-lock="true" type="string" unique="false">
+            <column length="18" name="userRole" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

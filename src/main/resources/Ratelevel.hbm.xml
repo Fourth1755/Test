@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Ratelevel" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="ratelevel">
+        <id name="rateId" type="java.lang.Integer">
+            <column name="rateID"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="level" optimistic-lock="true" type="string" unique="false">
+            <column length="3" name="level" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="description" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="description" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="minPercent" optimistic-lock="true" type="int" unique="false">
+            <column name="minPercent" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="maxPercent" optimistic-lock="true" type="int" unique="false">
+            <column name="maxPercent" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="weight" optimistic-lock="true" type="float" unique="false">
+            <column name="weight" not-null="true" precision="12" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="computable" optimistic-lock="true" type="int" unique="false">
+            <column name="computable" not-null="true">
+                <comment>0-notcomputePerformance 1-computePerformance</comment>
+            </column>
+        </property>
+
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="earsForDerRateM" optimistic-lock="true"  table="ear" cascade="all">
+            <key on-delete="noaction">
+                <column name="DER_rate_M"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Ear" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="earsForDerRateA" optimistic-lock="true" table="ear" cascade="save-update">
+            <key on-delete="noaction">
+                <column name="DER_rate_A"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Ear" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="undetectears" optimistic-lock="true" table="undetectear" cascade="save-update">
+            <key on-delete="noaction">
+                <column name="rating" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Undetectear" embed-xml="true" not-found="exception"/>
+        </bag>
+<!--
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="earsForDerRateM" optimistic-lock="true" sort="unsorted" table="ear" cascade="all">
+            <key on-delete="noaction">
+                <column name="DER_rate_M"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Ear" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="earsForDerRateA" optimistic-lock="true" sort="unsorted" table="ear" cascade="save-update">
+            <key on-delete="noaction">
+                <column name="DER_rate_A"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Ear" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="undetectears" optimistic-lock="true" sort="unsorted" table="undetectear" cascade="save-update">
+            <key on-delete="noaction">
+                <column name="rating" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Undetectear" embed-xml="true" not-found="exception"/>
+        </set>
+-->
+    </class>
+</hibernate-mapping>

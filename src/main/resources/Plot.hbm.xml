@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Plot" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="plot">
+        <id name="plotId" type="java.lang.Integer">
+            <column name="plotID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="syngenta.der.entities.Trial" embed-xml="true" fetch="select" insert="true" name="trial" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="20" name="trialID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Useraccount" embed-xml="true" fetch="select" insert="true" name="useraccountByApproveBy" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="approveBy" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Useraccount" embed-xml="true" fetch="select" insert="true" name="useraccountByUploadBy" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="uploadBy"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="barcode" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="barcode" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="pltId" optimistic-lock="true" type="string" unique="false">
+            <column length="6" name="pltID" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="repNo" optimistic-lock="true" type="int" unique="false">
+            <column name="repNo" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="abbrc" optimistic-lock="true" type="string" unique="false">
+            <column length="60" name="ABBRC"/>
+        </property>
+        <property generated="never" lazy="false" name="entno" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="ENTNO">
+                <comment>entry number</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="notet" optimistic-lock="true" type="string" unique="false">
+            <column length="150" name="NOTET">
+                <comment>Note</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="plotImgPath" optimistic-lock="true" type="string" unique="false">
+            <column name="plotImgPath"/>
+        </property>
+        <property generated="never" lazy="false" name="plotImgPathS" optimistic-lock="true" type="string" unique="false">
+            <column name="plotImgPathS"/>
+        </property>
+        <property generated="never" lazy="false" name="plotImgBoxPath" optimistic-lock="true" type="string" unique="false">
+            <column name="plotImgBoxPath"/>
+        </property>
+        <property generated="never" lazy="false" name="plotImgBoxPathS" optimistic-lock="true" type="string" unique="false">
+            <column name="plotImgBoxPathS"/>
+        </property>
+        <property generated="never" lazy="false" name="uploadDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="uploadDate"/>
+        </property>
+        <property generated="never" lazy="false" name="eartnA" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="EARTN_A">
+                <comment>auto_total number of ear</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="dlernA" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="DLERN_A">
+                <comment>auto_diplodia ear rot number</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="dlerpA" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="DLERP_A" precision="12" scale="0">
+                <comment>auto_diplodia ear rot percent</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="drwapA" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="DRWAP_A" precision="12" scale="0">
+                <comment>auto_diplodia ear rot weight average percentage use by pathologist</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="eartnM" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="EARTN_M">
+                <comment>manual_total number of ear</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="dlernM" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="DLERN_M">
+                <comment>manual_diplodia ear rot number</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="dlerpM" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="DLERP_M" precision="12" scale="0">
+                <comment>manual_diplodia ear rot percent</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="drwapM" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="DRWAP_M" precision="12" scale="0">
+                <comment>manual_diplodia ear rot weight average percentage use by pathologist</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="approveDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="approveDate"/>
+        </property>
+        <property generated="never" lazy="false" name="plotProgress" optimistic-lock="true" type="string" unique="false">
+            <column length="8" name="plotProgress" not-null="true">
+                <comment>1-noImg 2-uploaded 3-approved</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="plotStatus" optimistic-lock="true" type="string" unique="false">
+            <column length="12" name="plotStatus" not-null="true">
+                <comment>1-open 2-lockUpload 3-lockApprove</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="plotActive" optimistic-lock="true" type="string" unique="false">
+            <column length="8" name="plotActive" not-null="true">
+                <comment>0-inactive 1-active</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="lastUpdate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="last_update" not-null="true"/>
+        </property>
+
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="ears" optimistic-lock="true" table="ear" cascade="all">
+            <key on-delete="noaction">
+                <column name="plotID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Ear" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="undetectears" optimistic-lock="true" table="undetectear" cascade="all">
+            <key on-delete="noaction">
+                <column name="pltID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Undetectear" embed-xml="true" not-found="exception"/>
+        </bag>
+<!--
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="ears" optimistic-lock="true" sort="unsorted" table="ear" cascade="all">
+            <key on-delete="noaction">
+                <column name="plotID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Ear" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="undetectears" optimistic-lock="true" sort="unsorted" table="undetectear" cascade="all">
+            <key on-delete="noaction">
+                <column name="pltID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Undetectear" embed-xml="true" not-found="exception"/>
+        </set>
+-->
+    </class>
+</hibernate-mapping>

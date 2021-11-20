@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx.xsd 
+  http://www.springframework.org/schema/data/jpa
+  http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+--> 
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2-2.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/data/jpa
+  		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+   
+	 <context:annotation-config />
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+     <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" /> 
+
+	 <context:property-placeholder location="classpath:application.properties"/>
+
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="syngenta.der.entities"/>
+       <!-- <property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration"/> -->
+       <property name="jpaVendorAdapter">
+        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+    </property>
+	<property name="mappingResources">
+      <list>
+        <value>Country.hbm.xml</value>
+		<value>Countryadmin.hbm.xml</value>
+		<value>Ear.hbm.xml</value>
+		<value>Plot.hbm.xml</value>
+		<value>Position.hbm.xml</value>
+		<value>Ratelevel.hbm.xml</value>
+		<value>Trial.hbm.xml</value>
+		<value>Undetectear.hbm.xml</value>
+		<value>Useraccount.hbm.xml</value>
+		<value>Usertrial.hbm.xml</value>
+      </list>
+    </property>
+    <property name="jpaProperties">
+        <props>
+           <!-- <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
+           <prop key="hibernate.current_session_context_class">thread</prop>
+		   <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+		   <prop key="hibernate.show_sql">false</prop>
+           <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+        </props>
+    </property>
+    </bean>
+	
+	<jpa:repositories base-package="syngenta.der.repository" entity-manager-factory-ref="sessionFactory"/>
+ 
+ 
+    
+   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="sessionFactory" />
+  </bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<security:global-method-security pre-post-annotations="enabled" proxy-target-class="true" authentication-manager-ref="authenticationManager">
+		<!--you could also wire in the expression handler up at the layer of the http filters. See https://jira.springsource.org/browse/SEC-1452 -->
+	</security:global-method-security>
+
+
+
+<bean id="persistenceExceptionTranslationPostProcessor" class=
+  "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+ <!-- <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+
+  <context:component-scan base-package="syngenta.der" />
+-->		
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Country" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="country">
+        <id name="countryId" type="java.lang.Integer">
+            <column name="countryID"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="countryName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="countryName" not-null="true"/>
+        </property>
+
+  		<bag embed-xml="true" fetch="select" inverse="true" lazy="true" cascade="all" mutable="true" name="useraccounts" optimistic-lock="true" table="useraccount">
+            <key on-delete="noaction">
+                <column name="countryID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Useraccount" embed-xml="true" not-found="exception"/>
+        </bag>
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" cascade="all" mutable="true" name="countryadmins" optimistic-lock="true" table="countryadmin">
+            <key on-delete="noaction">
+                <column name="countryID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Countryadmin" embed-xml="true" not-found="exception"/>
+        </bag> 
+ <!--       <set embed-xml="true" fetch="select" inverse="true" lazy="false" cascade="all" mutable="true" name="useraccounts" optimistic-lock="true" sort="unsorted" table="useraccount">
+            <key on-delete="noaction">
+                <column name="countryID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Useraccount" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" cascade="all" mutable="true" name="countryadmins" optimistic-lock="true" sort="unsorted" table="countryadmin">
+            <key on-delete="noaction">
+                <column name="countryID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Countryadmin" embed-xml="true" not-found="exception"/>
+        </set> 
+
+-->
+    </class>
+</hibernate-mapping>

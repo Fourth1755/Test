@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Trial" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="trial">
+        <id name="trialId" type="string">
+            <column length="20" name="trialID"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="syngenta.der.entities.Useraccount" embed-xml="true" fetch="select" insert="true" name="useraccount" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="owner" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="aliasName" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="aliasName"/>
+        </property>
+        <property generated="never" lazy="false" name="trialActive" optimistic-lock="true" type="string" unique="false">
+            <column length="8" name="trialActive" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="trialStatus" optimistic-lock="true" type="string" unique="false">
+            <column length="12" name="trialStatus" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="plotSettingAutoLockUpload" optimistic-lock="true" type="int" unique="false">
+            <column name="plotSettingAutoLockUpload" not-null="true">
+                <comment>0-manualLock 1-autoLock</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="plotSettingAutoLockApproved" optimistic-lock="true" type="int" unique="false">
+            <column name="plotSettingAutoLockApproved" not-null="true">
+                <comment>0-manualLock 1-autoLock</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="createDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="create_date" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="lastUpdate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="last_update" not-null="true"/>
+        </property>
+<!-- 
+       <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="usertrials" optimistic-lock="true" sort="unsorted" table="usertrial">
+            <key on-delete="noaction">
+                <column length="20" name="trialID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Usertrial" embed-xml="true" not-found="exception"/>
+        </set>
+
+	    <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="plots" optimistic-lock="true" 	sort="unsorted" table="plot" cascade="all">
+            <key on-delete="noaction">
+                <column length="20" name="trialID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Plot" embed-xml="true" not-found="exception"/>
+        </set>
+-->
+       <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="usertrials" optimistic-lock="true" table="usertrial">
+            <key on-delete="noaction">
+                <column length="20" name="trialID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Usertrial" embed-xml="true" not-found="exception"/>
+        </bag>
+
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="plots" optimistic-lock="true" table="plot" cascade="all" order-by="trialID asc" >
+            <key on-delete="noaction">
+                <column length="20" name="trialID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Plot" embed-xml="true" not-found="exception"/>
+        </bag>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Ear" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="ear">
+        <id name="cornId" type="java.lang.Integer">
+            <column name="cornID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="syngenta.der.entities.Plot" embed-xml="true" fetch="select" insert="true" name="plot" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="plotID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Ratelevel" embed-xml="true" fetch="select" insert="true" name="ratelevelByDerRateM" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="DER_rate_M"/>
+        </many-to-one>
+        <many-to-one class="syngenta.der.entities.Ratelevel" embed-xml="true" fetch="select" insert="true" name="ratelevelByDerRateA" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="DER_rate_A"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="earImgPath" optimistic-lock="true" type="string" unique="false">
+            <column name="earImgPath" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="earImgPathS" optimistic-lock="true" type="string" unique="false">
+            <column name="earImgPathS" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="derPercentA" optimistic-lock="true" type="float" unique="false">
+            <column name="DER_percent_A" not-null="true" precision="12" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="derPercentM" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="DER_percent_M" precision="12" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="imgPosX" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="imgPosX"/>
+        </property>
+        <property generated="never" lazy="false" name="imgPosY" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="imgPosY"/>
+        </property>
+        <property generated="never" lazy="false" name="imgWidth" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="imgWidth"/>
+        </property>
+        <property generated="never" lazy="false" name="imgHeigh" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="imgHeigh"/>
+        </property>
+        <property generated="never" lazy="false" name="cornDetectType" optimistic-lock="true" type="string" unique="false">
+            <column length="6" name="cornDetectType" not-null="true">
+                <comment>1-auto detect 2-manual</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="earProgress" optimistic-lock="true" type="string" unique="false">
+            <column length="8" name="earProgress" not-null="true">
+                <comment>1-notApprove 2-Approved</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="lastUpdate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="last_update" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

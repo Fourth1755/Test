@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Oct 14, 2021, 2:35:26 PM by Hibernate Tools 5.5.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="synderrara" dynamic-insert="false" dynamic-update="false" mutable="true" name="syngenta.der.entities.Position" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="position">
+        <id name="positionId" type="java.lang.Integer">
+            <column name="positionID"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="positionName" optimistic-lock="true" type="string" unique="false">
+            <column length="40" name="positionName" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="createTrial" optimistic-lock="true" type="boolean" unique="false">
+            <column name="createTrial" not-null="true"/>
+        </property>
+
+        <bag embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="useraccounts" optimistic-lock="true" table="useraccount" cascade="all">
+            <key on-delete="noaction">
+                <column name="positionID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Useraccount" embed-xml="true" not-found="exception"/>
+        </bag> 
+<!--
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="useraccounts" optimistic-lock="true" sort="unsorted" table="useraccount" cascade="all">
+            <key on-delete="noaction">
+                <column name="positionID" not-null="true"/>
+            </key>
+            <one-to-many class="syngenta.der.entities.Useraccount" embed-xml="true" not-found="exception"/>
+        </set> 
+-->
+    </class>
+</hibernate-mapping>
